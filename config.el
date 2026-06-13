@@ -64,6 +64,26 @@
               (buffer-face-mode 1))
             (buffer-face-mode (if writeroom-mode 1 -1))))
 
+(defun wslp ()
+  "Return t if Emacs is running in WSL2, nil otherwise."
+  (and
+   ;; Check if the system is Linux
+   (eq system-type 'gnu/linux)
+   ;; Check for WSL-specific file
+   (file-exists-p "/proc/sys/fs/binfmt_misc/WSLInterop")
+   ;; Check for WSL2-specific file
+   (file-exists-p "/run/WSL")
+   ;; Additional check: look for Windows-style root directory
+   (file-directory-p "/mnt/c")))
+
+(when (wslp)
+                                        ; WSLg breaks copy-paste from Emacs into Windows
+                                        ; see: https://www.lukas-barth.net/blog/emacs-wsl-copy-clipboard/
+  (setq select-active-regions nil
+        select-enable-clipboard 't
+        select-enable-primary nil
+        interprogram-cut-function #'gui-select-text))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
 ;; settings. E.g.
