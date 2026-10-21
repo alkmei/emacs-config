@@ -56,3 +56,4 @@
 (package! fountain-mode)
 (package! org-roam-ui)
 (package! org-appear)
+(package! flycheck-eglot)
