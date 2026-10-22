@@ -33,11 +33,11 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'modus-vivendi)
-(setq doom-font (font-spec :family "Iosevka" :size 16))
-(setq doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16))
-
-(when (equal (system-name) "DESKTOP-0KQU28O")
-  (doom/increase-font-size 2))
+(if (equal (system-name) "DESKTOP-0KQU28O")
+    (setq doom-font (font-spec :family "Iosevka" :size 24)
+          doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 24))
+  (setq doom-font (font-spec :family "Iosevka" :size 16)
+        doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16)))
 
 (setq auto-save-visited-mode 1)
 (setq global-auto-revert-mode 1)
