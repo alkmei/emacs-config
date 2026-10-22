@@ -85,6 +85,7 @@
 
 (load! "org-config")
 (load! "js-config")
+(load! "terraform-config")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
