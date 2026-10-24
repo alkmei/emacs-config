@@ -56,3 +56,5 @@
 (package! fountain-mode)
 (package! org-roam-ui)
 (package! flycheck-eglot)
+(package! cmake-ide)
+(package! cmake-font-lock)

@@ -87,6 +87,27 @@
 (load! "js-config")
 (load! "terraform-config")
 
+;; Ghostel terminal
+(use-package! ghostel
+  :config
+  ;; Automatically download the pre-built native module on first launch if not already present
+  (setq ghostel-module-auto-install 'download))
+
+;; CMake syntax highlighting
+(use-package! cmake-font-lock
+  :after cmake-mode
+  :hook (cmake-mode . cmake-font-lock-activate))
+
+;; Performance optimization: Defer heavy git-commit mode to idle time
+;; instead of blocking the first file/buffer open.
+(remove-hook 'doom-first-file-hook #'global-git-commit-mode)
+(run-with-idle-timer 2 nil
+  (lambda ()
+    (require 'git-commit nil t)
+    (when (fboundp 'global-git-commit-mode)
+      (global-git-commit-mode 1))))
+
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
