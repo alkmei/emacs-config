@@ -91,7 +91,9 @@
 (use-package! ghostel
   :config
   ;; Automatically download the pre-built native module on first launch if not already present
-  (setq ghostel-module-auto-install 'download))
+  (setq ghostel-module-auto-install 'download)
+  ;; Open ghostel in a bottom popup buffer like VS Code's integrated terminal
+  (set-popup-rule! "^\\*ghostel" :side 'bottom :size 0.3 :quit nil :select t :ttl nil))
 
 ;; CMake syntax highlighting
 (use-package! cmake-font-lock
